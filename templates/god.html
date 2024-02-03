@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>God</title>
+</head>
+<body>
+
+<div>
+
+    {% if god %}<h1>{{ god }}</h1>{% endif %}
+
+    <form id="god" method="GET" action="/god">
+        <div>
+            <label for="theme">Theme</label>
+            <select name="theme" id="theme">
+                {% for choice in themes %}
+                <option value="{{ choice }}"{% if theme and choice == theme %}selected{% endif %}>{{ choice }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="culture">Culture</label>
+            <select name="culture" id="culture">
+                {% for choice in cultures %}
+                <option value="{{ choice }}"{% if culture and choice == culture %}selected{% endif %}>{{ choice }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+        <label for="egg">Parent 1 Domain</label>
+        <input type="text" name="egg" id="egg"{% if egg %} value="{{ egg }}"{% endif %}/>
+        </div>
+        <div>
+        <label for="sperm">Parent 2 Domain</label>
+        <input type="text" name="sperm" id="sperm"{% if sperm %} value="{{ sperm }}"{% endif %}/>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+</div>
+
+</body>
+</html>

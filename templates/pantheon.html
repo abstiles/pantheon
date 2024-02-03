@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>God</title>
+</head>
+<body>
+
+<div>
+    <form id="god" method="GET" action="/pantheon">
+        <div class="theme">
+            <label for="theme">Theme</label>
+            <select name="theme" id="theme">
+                {% for choice in themes %}
+                <option value="{{ choice }}"{% if theme and choice == theme %}selected{% endif %}>{{ choice }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="culture">
+            <label for="culture">Culture</label>
+            <select name="culture" id="culture">
+                {% for choice in cultures %}
+                <option value="{{ choice }}"{% if culture and choice == culture %}selected{% endif %}>{{ choice }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="domains">
+            <div>
+            <label for="domain1">Primordial Domain 1</label>
+            <input type="text" name="domain1" id="domain1"{% if domain1 %} value="{{ domain1 }}"{% endif %}/>
+            </div>
+            <div>
+            <label for="domain2">Primordial Domain 2</label>
+            <input type="text" name="domain2" id="domain2"{% if domain2 %} value="{{ domain2 }}"{% endif %}/>
+            </div>
+            <div>
+            <label for="domain3">Primordial Domain 3</label>
+            <input type="text" name="domain3" id="domain3"{% if domain3 %} value="{{ domain3 }}"{% endif %}/>
+            </div>
+            <div>
+            <label for="domain4">Primordial Domain 4</label>
+            <input type="text" name="domain4" id="domain4"{% if domain4 %} value="{{ domain4 }}"{% endif %}/>
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="family-tree">
+        {% for gen in range(generations) %}
+        <h1>Generation {{ gen }}</h1>
+        <ul>
+            {% for god in gods %}{% if god.gen == gen %}
+            <li class="god">
+                <span class="name">{{ god.god | string | trim(".") }}</span>{% if god.parent1 and god.parent2 %}, child of <span class="parent parent1">{{ god.parent1 | string | trim(".") }}</span> and <span class="parent parent2">{{ god.parent2 | string | trim(".") }}</span>{% endif %}
+            </li>
+            {% endif %}{% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
